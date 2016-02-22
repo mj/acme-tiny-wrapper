@@ -21,6 +21,7 @@ class handler:
         'certdir': '/home/certs/crt',
         'keydir': '/home/certs/key',
         'csrdir': '/home/certs/csr',
+        'spooldir': '/home/certs/spool',
         'challengedir': '/var/www/acme-challenges/',
         'account-key': '/home/certs/key/account.key',
         'acmedir': '/usr/local/bin/', # the directory where acme_tiny.py resides
@@ -91,6 +92,8 @@ class handler:
 
             f.close()
 
+        self.trigger_reload()
+
     def create(self, domain):
         print 'Creating certificate hasn\'t been implemeneted yet.'
         print
@@ -138,6 +141,9 @@ class handler:
             return None
 
         return crt
+
+    def trigger_reload(self):
+        open(self.config['spooldir'] + '/reload-webserver', 'a').close()
 
 def main():
     parser = argparse.ArgumentParser(description = 'Manage Let\'s Encrypt certificates')
