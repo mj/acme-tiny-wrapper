@@ -79,13 +79,16 @@ class handler:
             return
 
         signed_crt = self.get_crt(csr, domain)
-
-        # todo: handle intermediate = None
         intermediate = self.get_intermediate()
 
         with open(crt, 'w') as f:
             f.write(signed_crt)
-            f.write(intermediate)
+
+            if intermediate is not None:
+                with open(intermediate) as f2:
+                    f.write(f2.read())
+                f2.close()
+
             f.close()
 
     def create(self, domain):
