@@ -126,8 +126,8 @@ class handler:
             raise RuntimeError('Issuing certificate for ' + domain + ' failed: ' + str(e))
 
     def get_intermediate(self):
-        url = 'https://letsencrypt.org/certs/lets-encrypt-x1-cross-signed.pem'
-        crt = os.path.join(self.config['certdir'], 'lets-encrypt-x1-cross-signed.pem')
+        url = 'https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem'
+        crt = os.path.join(self.config['certdir'], 'lets-encrypt-x3-cross-signed.pem')
 
         if os.path.isfile(crt):
             return crt
