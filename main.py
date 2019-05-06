@@ -27,7 +27,6 @@ class handler:
         'acmedir': '/usr/local/bin/', # the directory where acme_tiny.py resides
         'user': 'certs',
         'debug': False,
-        'ca': 'https://acme-v01.api.letsencrypt.org',
         'openssl': '/usr/bin/openssl',
         'renewal-threshold': 7,
     }
@@ -121,7 +120,7 @@ class handler:
             file.close()
 
         try:
-            return acme_tiny.get_crt(self.config['account-key'], csr, self.config['challengedir'], log = logger, CA = self.config['ca'])
+            return acme_tiny.get_crt(self.config['account-key'], csr, self.config['challengedir'], log = logger)
         except Exception, e:
             raise RuntimeError('Issuing certificate for ' + domain + ' failed: ' + str(e))
 
